@@ -94,11 +94,12 @@ public class AudioFrequency extends CordovaPlugin
         public void handleMessage(Message msg) {
             AudioFrequency activity = mActivity.get();
             if (activity != null) {
-                Log.d(LOG_TAG, msg.getData().toString());
+                //Log.d(LOG_TAG, msg.getData().toString());
 
                 JSONObject info = new JSONObject();
                 try {
-                    info.put("frequency", msg.getData().getLong("frequency"));
+                    //info.put("frequency", msg.getData().getLong("frequency"));
+					info.put("frequency", msg.getData().toString());
                 } catch (JSONException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
