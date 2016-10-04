@@ -82,15 +82,19 @@ public class ToneReceiver extends Thread {
                     double[] magnitude = magnitude(fftData);
 
                     // Get the largest magnitude peak
-                    int peakIndex = peakIndex(magnitude);
+                    //int peakIndex = peakIndex(magnitude);
 
                     // gets frequency value for peak index
-                    double frequency = calculateFrequency(peakIndex);
-
+                    //double frequency = calculateFrequency(peakIndex);
+					double[] frequencies = calculateFrequencies(magnitude);
+					
                     // send frequency to handler
                     message = handler.obtainMessage();
-                    messageBundle.putLong("frequency", Math.round(frequency));
-                    message.setData(messageBundle);
+                    messageBundle.putDouble("frequencies", frequencies);
+					messageBundle.putDouble("magnitudes", magnitude);
+					
+					//messageBundle.putLong("frequencies", Math.round(frequency));
+					message.setData(messageBundle);
                     handler.sendMessage(message);
                 }
             }
@@ -149,6 +153,13 @@ public class ToneReceiver extends Thread {
             }
         }
         return peakIndex;
+    }
+	
+	private double[] calculateFrequencies(double[] data) {
+		for(int i = 0; i < data.length; i++){
+			data[i] = Math.round(sampleRateInHz * i / bufferSize);
+		}
+		return data;
     }
 
     private double calculateFrequency(double index) {
