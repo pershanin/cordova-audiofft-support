@@ -171,7 +171,7 @@ public class ToneReceiver extends Thread {
 	private Integer[] calculateMagnitudes(double[] data) {
 		Integer[] result = new Integer[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
-			result[i] = (int) Math.round(data[i]);
+			result[i] = (int) Math.round(10*Math.log10(data[i]));
 		}
 		return result;
     }
