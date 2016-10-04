@@ -99,8 +99,9 @@ public class AudioFrequency extends CordovaPlugin
                 JSONObject info = new JSONObject();
                 try {
                     //info.put("frequency", msg.getData().getLong("frequency"));
-					info.put("frequencies", msg.getData().getDoubleArray("frequencies"));
-					info.put("magnitudes", msg.getData().getDoubleArray("magnitudes"));
+					info.put("frequencies", new JSONArray(msg.getData().getIntArray("frequencies")));
+					info.put("magnitudes", new JSONArray(msg.getData().getDoubleArray("magnitudes")));
+					//info.put("frequency", msg.getData().toString());
                 } catch (JSONException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
