@@ -156,7 +156,7 @@ public class ToneReceiver extends Thread {
     }
 	
 	private int[] calculateFrequencies(double[] data) {
-		int[] result;
+		int[] result = new int[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
 			result[i] = (int) Math.round(sampleRateInHz * i / bufferSize);
 		}
