@@ -86,11 +86,11 @@ public class ToneReceiver extends Thread {
 
                     // gets frequency value for peak index
                     //double frequency = calculateFrequency(peakIndex);
-					int[] frequencies = calculateFrequencies(magnitude);
+					List<Integer> frequencies = calculateFrequencies(magnitude);
 					
                     // send frequency to handler
                     message = handler.obtainMessage();
-                    messageBundle.putStringArrayList("frequencies", frequencies);
+                    messageBundle.putIntegerArrayList("frequencies", frequencies);
 					//messageBundle.putDoubleArray("magnitudes", magnitude);
 					
 					//messageBundle.putLong("frequencies", Math.round(frequency));
@@ -155,10 +155,10 @@ public class ToneReceiver extends Thread {
         return peakIndex;
     }
 	
-	private int[] calculateFrequencies(double[] data) {
-		int[] result = new int[bufferSize / 2];
+	private List<Integer> calculateFrequencies(double[] data) {
+		List<Integer> result = new ArrayList<Integer>();
 		for(int i = 0; i < data.length; i++){
-			result[i] = (int) Math.round(sampleRateInHz * i / bufferSize);
+			result.add((int) Math.round(sampleRateInHz * i / bufferSize));
 		}
 		return result;
     }
