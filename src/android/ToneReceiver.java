@@ -90,8 +90,8 @@ public class ToneReceiver extends Thread {
 					
                     // send frequency to handler
                     message = handler.obtainMessage();
-                    messageBundle.putDouble("frequencies", frequencies);
-					messageBundle.putDouble("magnitudes", magnitude);
+                    messageBundle.putDoubleArray("frequencies", frequencies);
+					messageBundle.putDoubleArray("magnitudes", magnitude);
 					
 					//messageBundle.putLong("frequencies", Math.round(frequency));
 					message.setData(messageBundle);
