@@ -3,10 +3,10 @@ package com.cellules.cordova.audiofrequency;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import java.util.List;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import java.utils.ArrayList;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
@@ -87,11 +87,11 @@ public class ToneReceiver extends Thread {
 
                     // gets frequency value for peak index
                     //double frequency = calculateFrequency(peakIndex);
-					List<Integer> frequencies = calculateFrequencies(magnitude);
+					ArrayList<Integer> frequencies = new ArrayList<Integer>(Arrays.asList(calculateFrequencies(magnitude)));
 					
                     // send frequency to handler
                     message = handler.obtainMessage();
-                    messageBundle.putIntegerArrayList("frequencies", frequencies);
+                    messageBundle.putStringArrayList("frequencies", frequencies);
 					//messageBundle.putDoubleArray("magnitudes", magnitude);
 					
 					//messageBundle.putLong("frequencies", Math.round(frequency));
@@ -156,10 +156,10 @@ public class ToneReceiver extends Thread {
         return peakIndex;
     }
 	
-	private List<Integer> calculateFrequencies(double[] data) {
-		List<Integer> result = new ArrayList<Integer>();
+	private int[] calculateFrequencies(double[] data) {
+		int[] result = new int[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
-			result.add((int) Math.round(sampleRateInHz * i / bufferSize));
+			result[i] = (int) Math.round(sampleRateInHz * i / bufferSize);
 		}
 		return result;
     }
