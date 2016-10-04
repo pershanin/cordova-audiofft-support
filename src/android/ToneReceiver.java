@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
@@ -157,8 +159,8 @@ public class ToneReceiver extends Thread {
         return peakIndex;
     }
 	
-	private int[] calculateFrequencies(double[] data) {
-		int[] result = new int[bufferSize / 2];
+	private Integer[] calculateFrequencies(double[] data) {
+		Integer[] result = new Integer[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
 			result[i] = (int) Math.round(sampleRateInHz * i / bufferSize);
 		}
