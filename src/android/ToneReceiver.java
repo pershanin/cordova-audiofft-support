@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
@@ -91,7 +92,7 @@ public class ToneReceiver extends Thread {
 					
                     // send frequency to handler
                     message = handler.obtainMessage();
-                    messageBundle.putStringArrayList("frequencies", frequencies);
+                    messageBundle.putIntegerArrayList("frequencies", frequencies);
 					//messageBundle.putDoubleArray("magnitudes", magnitude);
 					
 					//messageBundle.putLong("frequencies", Math.round(frequency));
