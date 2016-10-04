@@ -177,7 +177,7 @@ public class ToneReceiver extends Thread {
 		Integer[] result = new Integer[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
 			if(i%10 == 0) {
-				result[i] = (int) Math.round(data[i]);
+				result[ii] = (int) Math.round(data[i]);
 				ii++;
 			}
 		}
