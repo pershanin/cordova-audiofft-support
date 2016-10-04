@@ -3,6 +3,7 @@ package com.cellules.cordova.audiofrequency;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import java.util.List;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
