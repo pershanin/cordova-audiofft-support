@@ -98,7 +98,7 @@ public class ToneReceiver extends Thread {
                     messageBundle.putIntegerArrayList("frequencies", frequencies);
 					messageBundle.putIntegerArrayList("magnitudes", magnitudes);
 					
-					//messageBundle.putLong("frequencies", Math.round(frequency));
+					messageBundle.putLong("bufferSize", bufferSize);
 					message.setData(messageBundle);
                     handler.sendMessage(message);
                 }
