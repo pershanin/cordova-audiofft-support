@@ -97,8 +97,6 @@ public class ToneReceiver extends Thread {
                     message = handler.obtainMessage();
                     messageBundle.putIntegerArrayList("frequencies", frequencies);
 					messageBundle.putIntegerArrayList("magnitudes", magnitudes);
-					
-					messageBundle.putLong("bufferSize", bufferSize);
 					message.setData(messageBundle);
                     handler.sendMessage(message);
                 }
@@ -138,17 +136,26 @@ public class ToneReceiver extends Thread {
     // }
 
     private double[] magnitude(double[] realData) {
-         double[] magnitude = new double[bufferSize / 2];
-         for (int i = 0; i < magnitude.length; i++) {
-             double R = realData[2*i];
-             double I = realData[2*i+1];
-             // complex numbers -> vectors
-             magnitude[i] = Math.sqrt(I*I + R*R);
-         }
-         return magnitude;
+        double[] magnitude = new double[bufferSize / 16];
+		double[] maxMagnitude = new double[16];
+        int mi = 0;
+		int m = 0;
+		for (int i = 0; i < realData.length/2; i++) {
+            double R = realData[2*i];
+            double I = realData[2*i+1];
+            if(mi%16 == 0) {
+				magnitude[m] = peakIndex(maxMagnitude);
+				mi = 0;
+				m++;
+			}
+			// complex numbers -> vectors
+			maxMagnitude[mi] = Math.sqrt(I*I + R*R);
+			mi++;
+        }
+        return magnitude;
     }
 
-    private int peakIndex(double[] data) {
+    private double peakIndex(double[] data) {
         int peakIndex = 0;
         double peak = data[0];
         for(int i = 0; i < data.length; i++){
@@ -157,7 +164,7 @@ public class ToneReceiver extends Thread {
                 peakIndex = i;
             }
         }
-        return peakIndex;
+        return peak;
     }
 	
 	private Integer[] calculateFrequencies(double[] data) {
