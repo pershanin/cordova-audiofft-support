@@ -136,14 +136,14 @@ public class ToneReceiver extends Thread {
     // }
 
     private double[] magnitude(double[] realData) {
-        double[] magnitude = new double[bufferSize / 64];
-		double[] maxMagnitude = new double[64];
+        double[] magnitude = new double[bufferSize / 128];
+		double[] maxMagnitude = new double[128];
         int mi = 0;
 		int m = 0;
 		for (int i = 0; i < realData.length/2; i++) {
             double R = realData[2*i];
             double I = realData[2*i+1];
-            if(mi%64 == 0) {
+            if(mi%128 == 0) {
 				magnitude[m] = peakIndex(maxMagnitude);
 				mi = 0;
 				m++;
@@ -169,7 +169,7 @@ public class ToneReceiver extends Thread {
 	
 	private Integer[] calculateFrequencies(double[] data) {
 		//int ii = 0;
-		Integer[] result = new Integer[bufferSize / 64];
+		Integer[] result = new Integer[bufferSize / 128];
 		for(int i = 0; i < data.length; i++){
 			//if(i%10 == 0) {
 				result[i] = (int) Math.round(sampleRateInHz * i / bufferSize);
@@ -181,7 +181,7 @@ public class ToneReceiver extends Thread {
 	
 	private Integer[] calculateMagnitudes(double[] data) {
 		//int ii = 0;
-		Integer[] result = new Integer[bufferSize / 64];
+		Integer[] result = new Integer[bufferSize / 128];
 		for(int i = 0; i < data.length; i++){
 			//if(i%10 == 0) {
 				result[i] = (int) Math.round(data[i]);
