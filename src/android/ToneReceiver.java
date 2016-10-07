@@ -97,6 +97,8 @@ public class ToneReceiver extends Thread {
                     message = handler.obtainMessage();
                     messageBundle.putIntegerArrayList("frequencies", frequencies);
 					messageBundle.putIntegerArrayList("magnitudes", magnitudes);
+					
+					//messageBundle.putLong("frequencies", Math.round(frequency));
 					message.setData(messageBundle);
                     handler.sendMessage(message);
                 }
@@ -136,26 +138,17 @@ public class ToneReceiver extends Thread {
     // }
 
     private double[] magnitude(double[] realData) {
-        double[] magnitude = new double[bufferSize / 128];
-		double[] maxMagnitude = new double[128];
-        int mi = 0;
-		int m = 0;
-		for (int i = 0; i < realData.length/2; i++) {
-            double R = realData[2*i];
-            double I = realData[2*i+1];
-            if(mi%128 == 0) {
-				magnitude[m] = peakIndex(maxMagnitude);
-				mi = 0;
-				m++;
-			}
-			// complex numbers -> vectors
-			maxMagnitude[mi] = Math.sqrt(I*I + R*R);
-			mi++;
-        }
-        return magnitude;
+         double[] magnitude = new double[bufferSize / 2];
+         for (int i = 0; i < magnitude.length; i++) {
+             double R = realData[2*i];
+             double I = realData[2*i+1];
+             // complex numbers -> vectors
+             magnitude[i] = Math.sqrt(I*I + R*R);
+         }
+         return magnitude;
     }
 
-    private double peakIndex(double[] data) {
+    private int peakIndex(double[] data) {
         int peakIndex = 0;
         double peak = data[0];
         for(int i = 0; i < data.length; i++){
@@ -164,29 +157,29 @@ public class ToneReceiver extends Thread {
                 peakIndex = i;
             }
         }
-        return peak;
+        return peakIndex;
     }
 	
 	private Integer[] calculateFrequencies(double[] data) {
-		//int ii = 0;
-		Integer[] result = new Integer[bufferSize / 128];
+		int ii = 0;
+		Integer[] result = new Integer[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
-			//if(i%10 == 0) {
-				result[i] = (int) Math.round(sampleRateInHz * i / bufferSize);
-				//ii++;
-			//}
+			if(i%128 == 0) {
+				result[ii] = (int) Math.round(sampleRateInHz * i / bufferSize);
+				ii++;
+			}
 		}
 		return result;
     }
 	
 	private Integer[] calculateMagnitudes(double[] data) {
-		//int ii = 0;
-		Integer[] result = new Integer[bufferSize / 128];
+		int ii = 0;
+		Integer[] result = new Integer[bufferSize / 2];
 		for(int i = 0; i < data.length; i++){
-			//if(i%10 == 0) {
-				result[i] = (int) Math.round(data[i]);
-				//ii++;
-			//}
+			if(i%128 == 0) {
+				result[ii] = (int) Math.round(data[i]);
+				ii++;
+			}
 		}
 		return result;
     }
