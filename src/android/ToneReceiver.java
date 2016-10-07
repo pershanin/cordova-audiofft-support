@@ -164,7 +164,7 @@ public class ToneReceiver extends Thread {
 		int ii = 0;
 		Integer[] result = new Integer[bufferSize / 128];
 		for(int i = 0; i < data.length; i++){
-			if(i%128 == 0) {
+			if(i%64 == 0) {
 				result[ii] = (int) Math.round(sampleRateInHz * i / bufferSize);
 				ii++;
 			}
@@ -176,7 +176,7 @@ public class ToneReceiver extends Thread {
 		int ii = 0;
 		Integer[] result = new Integer[bufferSize / 128];
 		for(int i = 0; i < data.length; i++){
-			if(i%128 == 0) {
+			if(i%64 == 0) {
 				result[ii] = (int) Math.round(data[i]);
 				ii++;
 			}
