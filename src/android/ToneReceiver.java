@@ -162,9 +162,9 @@ public class ToneReceiver extends Thread {
 	
 	private Integer[] calculateFrequencies(double[] data) {
 		int ii = 0;
-		Integer[] result = new Integer[bufferSize / 128];
+		Integer[] result = new Integer[bufferSize / 32];
 		for(int i = 0; i < data.length; i++){
-			if(i%64 == 0) {
+			if(i%8 == 0) {
 				result[ii] = (int) Math.round(sampleRateInHz * i / bufferSize);
 				ii++;
 			}
@@ -174,9 +174,9 @@ public class ToneReceiver extends Thread {
 	
 	private Integer[] calculateMagnitudes(double[] data) {
 		int ii = 0;
-		Integer[] result = new Integer[bufferSize / 128];
+		Integer[] result = new Integer[bufferSize / 32];
 		for(int i = 0; i < data.length; i++){
-			if(i%64 == 0) {
+			if(i%8 == 0) {
 				result[ii] = (int) Math.round(data[i]);
 				ii++;
 			}
