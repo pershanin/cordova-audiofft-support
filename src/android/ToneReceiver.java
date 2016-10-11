@@ -90,12 +90,12 @@ public class ToneReceiver extends Thread {
 
                     // gets frequency value for peak index
                     //double frequency = calculateFrequency(peakIndex);
-					ArrayList<Integer> frequencies = new ArrayList<Integer>(Arrays.asList(calculateFrequencies(magnitude)));
+					//ArrayList<Integer> frequencies = new ArrayList<Integer>(Arrays.asList(calculateFrequencies(magnitude)));
 					ArrayList<Integer> magnitudes = new ArrayList<Integer>(Arrays.asList(calculateMagnitudes(magnitude)));
 					
                     // send frequency to handler
                     message = handler.obtainMessage();
-                    messageBundle.putIntegerArrayList("frequencies", frequencies);
+                    //messageBundle.putIntegerArrayList("frequencies", frequencies);
 					messageBundle.putIntegerArrayList("magnitudes", magnitudes);
 					
 					//messageBundle.putLong("frequencies", Math.round(frequency));
@@ -162,9 +162,9 @@ public class ToneReceiver extends Thread {
 	
 	private Integer[] calculateFrequencies(double[] data) {
 		int ii = 0;
-		Integer[] result = new Integer[bufferSize / 32];
+		Integer[] result = new Integer[bufferSize / 16];
 		for(int i = 0; i < data.length; i++){
-			if(i%16 == 0) {
+			if(i%8 == 0) {
 				result[ii] = (int) Math.round(sampleRateInHz * i / bufferSize);
 				ii++;
 			}
@@ -174,10 +174,11 @@ public class ToneReceiver extends Thread {
 	
 	private Integer[] calculateMagnitudes(double[] data) {
 		int ii = 0;
-		Integer[] result = new Integer[bufferSize / 32];
+		Integer[] result = new Integer[bufferSize / 16];
 		for(int i = 0; i < data.length; i++){
-			if(i%16 == 0) {
-				result[ii] = (int) Math.round(data[i]);
+			if(i%8 == 0) {
+				result[2*ii] = (int) Math.round(data[i]);
+				result[2*ii+1] = (int) Math.round(sampleRateInHz * i / bufferSize);
 				ii++;
 			}
 		}
