@@ -34,7 +34,7 @@ public class AudioFrequency extends CordovaPlugin
             this.callbackContext = callbackContext;
 
             try {
-                receiver = new ToneReceiver(16384);
+                receiver = new ToneReceiver(4096);
                 receiver.setHandler(handler);
                 receiver.start();
             } catch (Exception e) {
@@ -98,8 +98,7 @@ public class AudioFrequency extends CordovaPlugin
                 
 				JSONObject info = new JSONObject();
                 try {
-                    //info.put("frequencies", new JSONArray(msg.getData().getIntegerArrayList("frequencies")));
-					info.put("magnitudes", new JSONArray(msg.getData().getIntegerArrayList("magnitudes")));
+                    info.put("magnitudes", new JSONArray(msg.getData().getIntegerArrayList("magnitudes")));
                 } catch (JSONException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
