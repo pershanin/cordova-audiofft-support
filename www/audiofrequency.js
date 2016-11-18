@@ -1,5 +1,5 @@
-cordova.define("cordova/plugin/audiofrequency", function(require, exports, module) {
-    var exec = require('cordova/exec');
+var cordova = require('cordova'),
+    exec = require('cordova/exec');
 
     var AudioFrequency = function() {};
 	
@@ -22,4 +22,3 @@ cordova.define("cordova/plugin/audiofrequency", function(require, exports, modul
 	var audiofrequency = new AudioFrequency();
 
 	module.exports = audiofrequency;
-});
