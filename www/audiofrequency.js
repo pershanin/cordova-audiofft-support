@@ -20,6 +20,7 @@ var AudioFrequency = function () {
  * Keep track of how many handlers we have so we can start and stop the native frequency listener appropriately.
  */
 AudioFrequency.onHasSubscribersChange = function () {
+  alert(1);
   // If we just registered the first handler, make sure native listener is started.
   if (this.numHandlers === 1 && handlers() === 1) {
       exec(audiofrequency._frequency, audiofrequency._error, "AudioFrequency", "start", []);
@@ -35,7 +36,7 @@ AudioFrequency.onHasSubscribersChange = function () {
  */
 AudioFrequency.prototype._frequency = function (frequencyData) {
     // Fire audiofrequency event
-    alert(1);
+    alert(2);
 	cordova.fireWindowEvent("audiofrequency", frequencyData);
 };
 
