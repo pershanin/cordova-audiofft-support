@@ -1,5 +1,7 @@
 var cordova = require('cordova'),
     exec = require('cordova/exec');
+	
+	cordova.addWindowEventHandler("audiofrequency");
 
     var AudioFrequency = function() {};
 	
