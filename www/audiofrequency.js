@@ -35,8 +35,7 @@ AudioFrequency.onHasSubscribersChange = function () {
  */
 AudioFrequency.prototype._frequency = function (frequencyData) {
     // Fire audiofrequency event
-    alert(111);
-	cordova.fireWindowEvent("audiofrequency", frequencyData);
+    cordova.fireWindowEvent("audiofrequency", frequencyData);
 };
 
 /**
