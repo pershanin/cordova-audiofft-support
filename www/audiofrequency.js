@@ -22,13 +22,9 @@ var AudioFrequency = function () {
 AudioFrequency.onHasSubscribersChange = function () {
   // If we just registered the first handler, make sure native listener is started.
   if (this.numHandlers === 1 && handlers() === 1) {
-      alert("start");
-	  exec(audiofrequency._frequency, audiofrequency._error, "AudioFrequency", "start", []);
+      exec(audiofrequency._frequency, audiofrequency._error, "AudioFrequency", "start", []);
   } else if (handlers() === 0) {
-      alert("stop");
-	  exec(null, null, "AudioFrequency", "stop", []);
-  } else {
-	  alert("no");
+      exec(null, null, "AudioFrequency", "stop", []);
   }
 };
 
@@ -47,7 +43,7 @@ AudioFrequency.prototype._frequency = function (frequencyData) {
  * Error callback for AudioFrequency start
  */
 AudioFrequency.prototype._error = function (e) {
-    console.log("Error initializing AudioFrequency: " + e);
+    alert("Error initializing AudioFrequency: " + e.toString());
 };
 
 var audiofrequency = new AudioFrequency();
