@@ -22,9 +22,13 @@ var AudioFrequency = function () {
 AudioFrequency.onHasSubscribersChange = function () {
   // If we just registered the first handler, make sure native listener is started.
   if (this.numHandlers === 1 && handlers() === 1) {
-      exec(audiofrequency._frequency, audiofrequency._error, "AudioFrequency", "start", []);
+      alert("start");
+	  exec(audiofrequency._frequency, audiofrequency._error, "AudioFrequency", "start", []);
   } else if (handlers() === 0) {
-      exec(null, null, "AudioFrequency", "stop", []);
+      alert("stop");
+	  exec(null, null, "AudioFrequency", "stop", []);
+  } else {
+	  alert("no");
   }
 };
 
