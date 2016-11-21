@@ -6,15 +6,15 @@
 
     <name>AudioFrequency</name>
 
-    <js-module name="AudioFrequency" src="www/audiofrequency.js">
-        <clobbers target="cordova.plugins.audiofrequency" />
+    <js-module name="audiofrequency" src="www/audiofrequency.js">
+        <clobbers target="audiofrequency" />
     </js-module>
 
     <!-- ios -->
     <platform name="ios">
 
         <config-file parent="/*" target="config.xml">
-            <feature name="AudioFrequency">
+            <feature name="audiofrequency">
                 <param name="ios-package" value="CDVAudioFrequency" />
             </feature>
         </config-file>
@@ -32,7 +32,7 @@
     <platform name="android">
 
         <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="AudioFrequency">
+            <feature name="audiofrequency">
                 <param name="android-package" value="com.cellules.cordova.audiofrequency.AudioFrequency" />
             </feature>
         </config-file>
